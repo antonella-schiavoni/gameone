@@ -1,0 +1,127 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    tools:context="guessme.ppc2017.unnoba.edu.ar.gameone.GameActivity">
+
+    <RelativeLayout
+        android:layout_height="0dip"
+        android:layout_width="fill_parent"
+        android:layout_weight="0.9">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playButton"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/play"
+            android:onClick="initiateGame"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_height="0dip"
+        android:layout_width="fill_parent"
+        android:layout_weight="0.1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1"
+            android:text="Mínimo"
+            android:textSize="15sp"
+            android:layout_alignParentTop="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/subtract"
+            android:id="@+id/lessMinimum"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:layout_toEndOf="@+id/textView1"
+            android:onClick="lessMinimum"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/minimum"
+            android:text="0"
+            android:textSize="25sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/lessMinimum"
+            android:layout_toEndOf="@+id/lessMinimum" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/plus"
+            android:id="@+id/moreMinimum"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/minimum"
+            android:layout_toEndOf="@+id/minimum"
+            android:onClick="moreMinimum"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView2"
+            android:text="Maximo"
+            android:textSize="15sp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_toRightOf="@+id/moreMinimum"
+            android:layout_toEndOf="@+id/moreMinimum"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/subtract"
+            android:id="@+id/lessMaximum"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/textView2"
+            android:layout_toEndOf="@+id/textView2"
+            android:onClick="lessMaximum"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/maximum"
+            android:text="20"
+            android:textSize="25sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/lessMaximum"
+            android:layout_toEndOf="@+id/lessMaximum" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/moreMaximum"
+            android:src="@drawable/plus"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/maximum"
+            android:layout_toEndOf="@+id/maximum"
+            android:onClick="moreMaximum"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
