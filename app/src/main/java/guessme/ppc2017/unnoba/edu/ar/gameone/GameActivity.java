@@ -1,5 +1,7 @@
 package guessme.ppc2017.unnoba.edu.ar.gameone;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -14,6 +16,7 @@ public class GameActivity extends AppCompatActivity {
     private int number4;
     private int number5;
     private int number6;
+    private int numberOfHits = 0;
 
     private ArrayList<Integer> pyramidNumbers;
     private MathOperation mathOperation;
@@ -34,12 +37,53 @@ public class GameActivity extends AppCompatActivity {
         pyramidNumbers.add(number4 = random.nextInt(10));
         pyramidNumbers.add(number5 = random.nextInt(10));
         pyramidNumbers.add(number6 = random.nextInt(10));
-
-
         mathOperation = new MathOperation(pyramidNumbers);
-        renderer.render(mathOperation,pyramidNumbers,this);
+        renderer.render(mathOperation, pyramidNumbers, this);
 
+        // Creamos la primer respuesta
+        new Answer(this, renderer.getNumber1(), mathOperation.getResult1(), renderer);
 
+    }
+
+    /**
+     * Cada vez que una respuesta (Answer) haya sido bien respondida, se llamara a este metodo,
+     * el cual verifica si fue llamado por primera, segunda o tercera vez. Si fue llamado por
+     * tercera vez, significa que ya fueron bien respondidas las 3 casillas, por lo cual
+     * espera 3 segundos, cierra el activity actual y abre uno nuevo
+     */
+    public void evaluateAllAnswers() {
+        // Incrementamos el numero de aciertos
+        numberOfHits += 1;
+        switch ( numberOfHits ) {
+            case 1:
+                // Dado que la primer casilla fue bien respondida, creamos la segunda
+                new Answer(this, renderer.getNumber2(), mathOperation.getNumber1(), renderer/*, sounds*/);
+                break;
+            case 2:
+                // Dado que la segunda casilla fue bien respondida, creamos la tercera
+                new Answer(this, renderer.getNumber4(), mathOperation.getNumber3(), renderer/*, sounds*/);
+                break;
+            case 3:
+                // Si estamos aqui, es porque ya fueron bien respondidas las 3 casillas
+
+                // Dentro del metodo run de nuestro runnable guardamos el codigo que queremos
+                // ejecutar (pero aun no lo hacemos)
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        // Crea un nuevo intent
+                        Intent intent = getIntent();
+                        // Finaliza el activity actual
+                        finish();
+                        // Abre el nuevo activity
+                        startActivity(intent);
+                    }
+                };
+                Handler handler = new Handler();
+                // Ejecuta el codigo que esta en run() dentro de runnable luego de 3000 milisegundos
+                handler.postDelayed(runnable, 3000);
+                break;
+        }
     }
 
 }

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 public class Renderer {
     //initial numbers that must be displayed.
     private TextView number1;
+    private TextView number2;
     private TextView number3;
     private TextView number5;
-    private TextView number2;
     private TextView number4;
     private TextView number6;
 
@@ -38,9 +38,11 @@ public class Renderer {
 
     private void linkElementsWithView(Activity activity) {
         setNumber1((TextView)activity.findViewById(R.id.number1));
+        setNumber2((TextView)activity.findViewById(R.id.number2));
         setNumber3((TextView) activity.findViewById(R.id.number3));
+        setNumber4((TextView) activity.findViewById(R.id.number4));
         setNumber5((TextView) activity.findViewById(R.id.number5));
-
+        setNumber6((TextView) activity.findViewById(R.id.number6));
 
         setResult1((TextView) activity.findViewById(R.id.result1));
         setResult2((TextView) activity.findViewById(R.id.result2));
@@ -62,24 +64,23 @@ public class Renderer {
         getNumber5().setTypeface(getFont());
 
         // Por cada una de las opciones (vista) tenemos que hacer lo siguiente:
-        for (int i = 0; i < getOptions().length; i++) {
+        for (int i = 0; i < options.length; i++) {
             // Settearle la fuente custom
-            getOptions()[i].setTypeface(getFont());
+            options[i].setTypeface(getFont());
             // Settearle el numero a mostrar, que se encuentra dentro de mathOperation
-            getOptions()[i].setText(mathOperation.getOptions().get(i).toString());
+            options[i].setText(mathOperation.getOptions().get(i).toString());
             // Settearle nuestro OnTouchListener custom, el cual recibe la posicion i como parametro
-            getOptions()[i].setOnTouchListener(new OptionsOnTouchListener(i));
+            options[i].setOnTouchListener(new OptionsOnTouchListener(i));
         }
 
+// Here I set the values of the corner of the pyramid.
         getNumber1().setText(String.valueOf(pyramidNumber.get(0)));
         getNumber3().setText(String.valueOf(pyramidNumber.get(2)));
         getNumber5().setText(String.valueOf(pyramidNumber.get(4)));
-
+//Here I set the final result of the 3 digits sum.
         getResult1().setText(String.valueOf(mathOperation.getResult1()));
         getResult2().setText(String.valueOf(mathOperation.getResult2()));
         getResult3().setText(String.valueOf(mathOperation.getResult3()));
-
-
     }
 
 
