@@ -17,18 +17,18 @@ import android.widget.TextView;
 public class Answer {
     private TextView uiElement; // Elemento de la vista
     private int expectedNumber; // Respuesta esperada para este elemento
-//    private Sounds sounds;
+    private Sounds sounds;
     private Renderer renderer;
     private GameActivity gameActivity;
 
     /**
      * Constructor que hace el setteo inicial y agrega un OnDragListener para realizar la evaluacion.
      */
-    public Answer(GameActivity gameActivity, TextView uiElement, int expectedNumber, final Renderer renderer /*Sounds sounds*/) {
+    public Answer(GameActivity gameActivity, TextView uiElement, int expectedNumber, final Renderer renderer, Sounds sounds) {
         // Setteo de los valores pasados como parametros.
         this.uiElement = uiElement;
         this.expectedNumber = expectedNumber;
-//        this.sounds = sounds;
+        this.sounds = sounds;
         this.renderer = renderer;
         this.gameActivity = gameActivity;
 
@@ -72,8 +72,8 @@ public class Answer {
 
         // Verificamos si el numero elegido es igual al esperado
         if ( chosenNumber == expectedNumber ) {
-//            // Emitimos sonido de exito
-//            sounds.emitSuccessSound();
+           // Emitimos sonido de exito
+            sounds.emitSuccessSound();
             // A nuestra casilla le setteamos el valor correcto (stringChosenNumber)
             uiElement.setText(stringChosenNumber);
             // A la opcion (vista) la dejamos vacia
@@ -87,8 +87,8 @@ public class Answer {
             // todas las casillas bien
             gameActivity.evaluateAllAnswers();
         } else {
-//            // Si elegimos la opcion equivocada, emitimos un sonido de error
-//            sounds.emitErrorSound();
+           // Si elegimos la opcion equivocada, emitimos un sonido de error
+            sounds.emitErrorSound();
         }
     }
 

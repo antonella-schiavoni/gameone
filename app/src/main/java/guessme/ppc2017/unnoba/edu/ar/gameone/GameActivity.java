@@ -18,6 +18,7 @@ public class GameActivity extends AppCompatActivity {
     private int number6;
     private int numberOfHits = 0;
 
+    private Sounds sounds;
     private ArrayList<Integer> pyramidNumbers;
     private MathOperation mathOperation;
     private Renderer renderer = new Renderer();
@@ -27,6 +28,8 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Creamos los sonidos del sistema (success y error) para este (this) context
+        sounds = new Sounds(this);
         //Vamos a crear los 6 numeros aleatorios entre 1 y 9
 
         Random random = new Random();
@@ -41,7 +44,9 @@ public class GameActivity extends AppCompatActivity {
         renderer.render(mathOperation, pyramidNumbers, this);
 
         // Creamos la primer respuesta
-        new Answer(this, renderer.getNumber1(), mathOperation.getResult1(), renderer);
+        new Answer(this, renderer.getNumber2(), mathOperation.getNumber2(), renderer, sounds);
+        new Answer(this, renderer.getNumber4(), mathOperation.getNumber4(), renderer, sounds);
+        new Answer(this, renderer.getNumber6(), mathOperation.getNumber6(), renderer, sounds);
 
     }
 
@@ -57,11 +62,11 @@ public class GameActivity extends AppCompatActivity {
         switch ( numberOfHits ) {
             case 1:
                 // Dado que la primer casilla fue bien respondida, creamos la segunda
-                new Answer(this, renderer.getNumber2(), mathOperation.getNumber1(), renderer/*, sounds*/);
+                new Answer(this, renderer.getNumber2(), mathOperation.getNumber1(), renderer, sounds);
                 break;
             case 2:
                 // Dado que la segunda casilla fue bien respondida, creamos la tercera
-                new Answer(this, renderer.getNumber4(), mathOperation.getNumber3(), renderer/*, sounds*/);
+                new Answer(this, renderer.getNumber4(), mathOperation.getNumber3(), renderer, sounds);
                 break;
             case 3:
                 // Si estamos aqui, es porque ya fueron bien respondidas las 3 casillas
