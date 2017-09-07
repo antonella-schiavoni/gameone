@@ -15,44 +15,45 @@ public class MathOperation {
     private int result1;
     private int result2;
     private int result3;
+    private int number1;
+    private int number3;
+
     private List options;
 
     public MathOperation(ArrayList<Integer> pyramidNumbers){
-        setNumbers(new ArrayList<Integer>());
-        this.setNumbers(pyramidNumbers);
-        this.setResult1(calculateResultOfOperation(0,2));
-        this.setResult1(calculateResultOfOperation(2,5));
-        this.setResult1(calculateResultOfOperation(5,6));
-        this.setOptions(generateListOfOptions());
+        this.setResult1(calculateResultOfOperation(0,2,pyramidNumbers));
+        this.setResult2(calculateResultOfOperation(2,4,pyramidNumbers));
+        this.setResult3(calculateResultOfOperation(4,5,pyramidNumbers));
+        this.setOptions(generateListOfOptions(pyramidNumbers));
     }
 
-    private int calculateResultOfOperation(int firstIndex,int lastIndex){
+    private int calculateResultOfOperation(int firstIndex,int lastIndex,ArrayList<Integer> pyramidNumbers){
         int result = 0;
         switch (lastIndex){
             case 2 :
-                result = getNumbers().get(0) + getNumbers().get(1) + getNumbers().get(2);
+                result = pyramidNumbers.get(0) + pyramidNumbers.get(1) +pyramidNumbers.get(2);
+                break;
+            case 4:
+                result = pyramidNumbers.get(2) +pyramidNumbers.get(3) + pyramidNumbers.get(4);
                 break;
             case 5:
-                result = getNumbers().get(2) + getNumbers().get(3) + getNumbers().get(4) + getNumbers().get(5);
-                break;
-            case 6:
-                result = getNumbers().get(5) + getNumbers().get(6) + getNumbers().get(0);
+                result = pyramidNumbers.get(4) + pyramidNumbers.get(5) +pyramidNumbers.get(0);
                 break;
         }
         return result;
     }
 
     //This method creates options for the user to choose, and among this options, there are the four correct answers and some fake ass well.
-    private List generateListOfOptions(){
+    private List generateListOfOptions(ArrayList<Integer> pyramidNumbers){
         List<Integer> options = new ArrayList<>();
-        options.add(getNumbers().get(1));
-        options.add(getNumbers().get(3));
-        options.add(getNumbers().get(4));
-        options.add(getNumbers().get(5));
+        options.add(pyramidNumbers.get(1));
+        options.add(pyramidNumbers.get(3));
+        options.add(pyramidNumbers.get(4));
+        options.add(pyramidNumbers.get(5));
 
         //Generate random numbers beetween 0 and 19
-        options.add((int) (Math.random() * 20));
-        options.add((int) (Math.random() * 20));
+        options.add((int) (Math.random() * 15));
+        options.add((int) (Math.random() * 15));
 
         // Shuffling the list
         long seed = System.nanoTime();
@@ -100,5 +101,21 @@ public class MathOperation {
 
     public void setOptions(List options) {
         this.options = options;
+    }
+
+    public int getNumber1() {
+        return number1;
+    }
+
+    public void setNumber1(int number1) {
+        this.number1 = number1;
+    }
+
+    public int getNumber3() {
+        return number3;
+    }
+
+    public void setNumber3(int number3) {
+        this.number3 = number3;
     }
 }
