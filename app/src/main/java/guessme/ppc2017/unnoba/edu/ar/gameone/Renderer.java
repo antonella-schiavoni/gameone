@@ -23,7 +23,6 @@ public class Renderer {
     private TextView result2;
     private TextView result3;
 
-
     //All the six options available.
     private TextView[] options = new TextView[6];
 
@@ -60,8 +59,14 @@ public class Renderer {
 
         // Setteamos la fuente custom a los operandos y el resultado
         getNumber1().setTypeface(getFont());
+        getNumber2().setTypeface(getFont());
         getNumber3().setTypeface(getFont());
+        getNumber4().setTypeface(getFont());
         getNumber5().setTypeface(getFont());
+        getNumber6().setTypeface(getFont());
+        getResult1().setTypeface(getFont());
+        getResult2().setTypeface(getFont());
+        getResult3().setTypeface(getFont());
 
         // Por cada una de las opciones (vista) tenemos que hacer lo siguiente:
         for (int i = 0; i < options.length; i++) {
@@ -158,10 +163,6 @@ public class Renderer {
 
     public TextView[] getOptions() {
         return options;
-    }
-
-    public void setOptions(TextView[] options) {
-        this.options = options;
     }
 
     public Typeface getFont() {

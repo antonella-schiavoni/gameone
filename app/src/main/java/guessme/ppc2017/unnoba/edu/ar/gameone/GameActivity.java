@@ -4,18 +4,11 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
-    private int number1;
-    private int number2;
-    private int number3;
-    private int number4;
-    private int number5;
-    private int number6;
     private int numberOfHits = 0;
 
     private Sounds sounds;
@@ -30,24 +23,29 @@ public class GameActivity extends AppCompatActivity {
 
         // Creamos los sonidos del sistema (success y error) para este (this) context
         sounds = new Sounds(this);
-        //Vamos a crear los 6 numeros aleatorios entre 1 y 9
 
-        Random random = new Random();
-        pyramidNumbers = new ArrayList<Integer>();
-        pyramidNumbers.add(number1 = random.nextInt(10));
-        pyramidNumbers.add(number2 = random.nextInt(10));
-        pyramidNumbers.add(number3 = random.nextInt(10));
-        pyramidNumbers.add(number4 = random.nextInt(10));
-        pyramidNumbers.add(number5 = random.nextInt(10));
-        pyramidNumbers.add(number6 = random.nextInt(10));
+        //Llamamos a
+        ArrayList<Integer> pyramidNumbers = buildPyramidNumbers();
         mathOperation = new MathOperation(pyramidNumbers);
         renderer.render(mathOperation, pyramidNumbers, this);
 
-        // Creamos la primer respuesta
-        new Answer(this, renderer.getNumber2(), mathOperation.getNumber2(), renderer, sounds);
-        new Answer(this, renderer.getNumber4(), mathOperation.getNumber4(), renderer, sounds);
-        new Answer(this, renderer.getNumber6(), mathOperation.getNumber6(), renderer, sounds);
+        // Creamos las tres respuestas, una por cada lado de la piramide
+        new Answer(this, renderer.getNumber2(), pyramidNumbers.get(1), renderer, sounds);
 
+    }
+
+    /**
+     * Este metodo se encarga de llenar el array con los numerso necesarios para
+     * @return pyramidNumbers
+     */
+    public ArrayList<Integer> buildPyramidNumbers(){
+        //Vamos a crear los 6 numeros aleatorios entre 1 y 9
+        pyramidNumbers = new ArrayList<>();
+        Random random = new Random();
+        for(int i = 0; i <= 6 ; i++){
+            pyramidNumbers.add(random.nextInt(10));
+        }
+        return pyramidNumbers;
     }
 
     /**
@@ -62,11 +60,11 @@ public class GameActivity extends AppCompatActivity {
         switch ( numberOfHits ) {
             case 1:
                 // Dado que la primer casilla fue bien respondida, creamos la segunda
-                new Answer(this, renderer.getNumber2(), mathOperation.getNumber1(), renderer, sounds);
+                new Answer(this, renderer.getNumber4(), pyramidNumbers.get(3), renderer, sounds);
                 break;
             case 2:
                 // Dado que la segunda casilla fue bien respondida, creamos la tercera
-                new Answer(this, renderer.getNumber4(), mathOperation.getNumber3(), renderer, sounds);
+                new Answer(this, renderer.getNumber6(), pyramidNumbers.get(5), renderer, sounds);
                 break;
             case 3:
                 // Si estamos aqui, es porque ya fueron bien respondidas las 3 casillas
