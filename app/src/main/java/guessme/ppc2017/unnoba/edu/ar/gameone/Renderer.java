@@ -36,8 +36,8 @@ public class Renderer {
     }
 
     private void linkElementsWithView(Activity activity) {
-        setNumber1((TextView)activity.findViewById(R.id.number1));
-        setNumber2((TextView)activity.findViewById(R.id.number2));
+        setNumber1((TextView) activity.findViewById(R.id.number1));
+        setNumber2((TextView) activity.findViewById(R.id.number2));
         setNumber3((TextView) activity.findViewById(R.id.number3));
         setNumber4((TextView) activity.findViewById(R.id.number4));
         setNumber5((TextView) activity.findViewById(R.id.number5));
@@ -67,6 +67,14 @@ public class Renderer {
         getResult1().setTypeface(getFont());
         getResult2().setTypeface(getFont());
         getResult3().setTypeface(getFont());
+        // Here I set the values of the corner of the pyramid.
+        getNumber1().setText(String.valueOf(pyramidNumber.get(0)));
+        getNumber3().setText(String.valueOf(pyramidNumber.get(2)));
+        getNumber5().setText(String.valueOf(pyramidNumber.get(4)));
+//Here I set the final result of the 3 digits sum.
+        getResult1().setText(String.valueOf(mathOperation.getResult1()));
+        getResult2().setText(String.valueOf(mathOperation.getResult2()));
+        getResult3().setText(String.valueOf(mathOperation.getResult3()));
 
         // Por cada una de las opciones (vista) tenemos que hacer lo siguiente:
         for (int i = 0; i < options.length; i++) {
@@ -77,15 +85,6 @@ public class Renderer {
             // Settearle nuestro OnTouchListener custom, el cual recibe la posicion i como parametro
             options[i].setOnTouchListener(new OptionsOnTouchListener(i));
         }
-
-// Here I set the values of the corner of the pyramid.
-        getNumber1().setText(String.valueOf(pyramidNumber.get(0)));
-        getNumber3().setText(String.valueOf(pyramidNumber.get(2)));
-        getNumber5().setText(String.valueOf(pyramidNumber.get(4)));
-//Here I set the final result of the 3 digits sum.
-        getResult1().setText(String.valueOf(mathOperation.getResult1()));
-        getResult2().setText(String.valueOf(mathOperation.getResult2()));
-        getResult3().setText(String.valueOf(mathOperation.getResult3()));
     }
 
 
