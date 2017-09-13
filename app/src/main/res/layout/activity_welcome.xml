@@ -8,27 +8,29 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp"
+    android:background="@drawable/background"
     tools:context="guessme.ppc2017.unnoba.edu.ar.gameone.WelcomeActivity">
 
     <RelativeLayout
-        android:layout_height="0dip"
         android:layout_width="fill_parent"
+        android:layout_height="0dip"
         android:layout_weight="0.9">
 
         <ImageView
+            android:id="@+id/playButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/playButton"
+            android:onClick="initiateGame"
+            android:src="@drawable/playbutton"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/play"
-            android:onClick="initiateGame"/>
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_height="0dip"
         android:layout_width="fill_parent"
+        android:gravity="center"
         android:layout_weight="0.1">
 
     <ImageView
@@ -36,9 +38,10 @@
             android:layout_height="wrap_content"
             android:src="@drawable/subtract"
             android:id="@+id/lessMaximum"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:onClick="lessMaximum"/>
+        android:onClick="lessMaximum"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,6 +49,7 @@
             android:id="@+id/maximum"
             android:text="20"
             android:textSize="25sp"
+            android:textColor="#000"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:layout_alignParentTop="true"
@@ -56,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/moreMaximum"
-            android:src="@drawable/plus"
+            android:src="@drawable/addition"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"

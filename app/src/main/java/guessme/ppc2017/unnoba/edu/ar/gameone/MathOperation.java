@@ -51,10 +51,6 @@ public class MathOperation {
         options.add((int) (Math.random() * maxRandom));
         options.add((int) (Math.random() * maxRandom));
 
-        options.add((int) (Math.random() * maxRandom));
-        options.add((int) (Math.random() * maxRandom));
-        options.add((int) (Math.random() * maxRandom));
-
         // Shuffling the list
         long seed = System.nanoTime();
         Collections.shuffle(options, new Random(seed));
