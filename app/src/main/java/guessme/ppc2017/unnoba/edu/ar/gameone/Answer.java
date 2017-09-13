@@ -7,6 +7,7 @@ package guessme.ppc2017.unnoba.edu.ar.gameone;
 import android.os.Handler;
 import android.view.DragEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -70,6 +71,9 @@ public class Answer {
         if (chosenNumber == expectedNumber) {
             // Emitimos sonido de exito
             sounds.emitSuccessSound();
+            // Mostramos la imagen de exito
+            ImageView rightImage = renderer.getRightAnswerButton();
+            renderImage(rightImage);
             // A nuestra casilla le setteamos el valor correcto (stringChosenNumber)
             uiElement.setText(stringChosenNumber);
             // A la opcion (vista) la dejamos vacia
@@ -85,17 +89,23 @@ public class Answer {
         } else {
             // Si elegimos la opcion equivocada, emitimos un sonido de error
             sounds.emitErrorSound();
-            // Y mostramos una imagen de "ERROR"
-            renderer.getWrongAnswerButton().setVisibility(View.VISIBLE);
-            Runnable runnable = new Runnable() {
-                public void run() {
-                    renderer.getWrongAnswerButton().setVisibility(View.GONE);
-                }
-            };
-            Handler handler1 = new Handler();
-            // Ejecuta el codigo que esta en run() dentro de runnable luego de 2000 milisegundos
-            handler1.postDelayed(runnable, 2000);
+            //Mostramos la imagen de error
+            ImageView wrongImage = renderer.getWrongAnswerButton();
+            renderImage(wrongImage);
+
         }
+    }
+
+    private void renderImage (final ImageView image){
+        image.setVisibility(View.VISIBLE);
+        Runnable runnable = new Runnable() {
+            public void run() {
+                image.setVisibility(View.GONE);
+            }
+        };
+        Handler handler1 = new Handler();
+        // Ejecuta el codigo que esta en run() dentro de runnable luego de 2000 milisegundos
+        handler1.postDelayed(runnable, 2000);
     }
 
 }
