@@ -11,16 +11,14 @@ import java.util.Random;
 
 public class MathOperation {
 
-    private int result1;
-    private int result2;
-    private int result3;
+    private int[] results = new int[3];
 
     private List options;
 
     public MathOperation(ArrayList<Integer> pyramidNumbers){
-        this.setResult1(calculateResultOfOperation(2,pyramidNumbers));
-        this.setResult2(calculateResultOfOperation(4,pyramidNumbers));
-        this.setResult3(calculateResultOfOperation(5,pyramidNumbers));
+        getResults()[0] = calculateResultOfOperation(2,pyramidNumbers);
+        getResults()[1] = calculateResultOfOperation(4,pyramidNumbers);
+        getResults()[2] = calculateResultOfOperation(5,pyramidNumbers);
         this.setOptions(generateListOfOptions(pyramidNumbers));
     }
 
@@ -45,12 +43,17 @@ public class MathOperation {
         List<Integer> options = new ArrayList<>();
         options.add(pyramidNumbers.get(1));
         options.add(pyramidNumbers.get(3));
-        options.add(pyramidNumbers.get(4));
         options.add(pyramidNumbers.get(5));
 
-        //Generate random numbers beetween 0 and 19
-        options.add((int) (Math.random() * 15));
-        options.add((int) (Math.random() * 15));
+        int maxRandom = Configuration.getConfig().getUpperLimit();
+
+        options.add((int) (Math.random() * maxRandom));
+        options.add((int) (Math.random() * maxRandom));
+        options.add((int) (Math.random() * maxRandom));
+
+        options.add((int) (Math.random() * maxRandom));
+        options.add((int) (Math.random() * maxRandom));
+        options.add((int) (Math.random() * maxRandom));
 
         // Shuffling the list
         long seed = System.nanoTime();
@@ -59,35 +62,15 @@ public class MathOperation {
         return options;
     }
 
-    public int getResult1() {
-        return result1;
-    }
-
-    public void setResult1(int result1) {
-        this.result1 = result1;
-    }
-
-    public int getResult2() {
-        return result2;
-    }
-
-    public void setResult2(int result2) {
-        this.result2 = result2;
-    }
-
-    public int getResult3() {
-        return result3;
-    }
-
-    public void setResult3(int result3) {
-        this.result3 = result3;
-    }
-
     public List getOptions() {
         return options;
     }
 
     public void setOptions(List options) {
         this.options = options;
+    }
+
+    public int[] getResults() {
+        return results;
     }
 }

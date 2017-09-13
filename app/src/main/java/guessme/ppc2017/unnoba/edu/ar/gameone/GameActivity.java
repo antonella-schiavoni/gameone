@@ -1,9 +1,10 @@
 package guessme.ppc2017.unnoba.edu.ar.gameone;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,8 +14,6 @@ public class GameActivity extends AppCompatActivity {
     private int numberOfHits = 0;
 
     private Sounds sounds;
-    private ArrayList<Integer> pyramidNumbers;
-    private MathOperation mathOperation;
     private Renderer renderer = new Renderer();
 
     @Override
@@ -25,15 +24,12 @@ public class GameActivity extends AppCompatActivity {
         // Creamos los sonidos del sistema (success y error) para este (this) context
         sounds = new Sounds(this);
 
-        //Llamamos a
         ArrayList<Integer> pyramidNumbers = buildPyramidNumbers();
-        mathOperation = new MathOperation(pyramidNumbers);
+        MathOperation mathOperation = new MathOperation(pyramidNumbers);
         renderer.render(mathOperation, pyramidNumbers, this);
 
         // Creamos las tres respuestas, una por cada lado de la piramide
-        new Answer(this, renderer.getNumber2(), pyramidNumbers.get(1), renderer, sounds);
-        new Answer(this, renderer.getNumber4(), pyramidNumbers.get(3), renderer, sounds);
-        new Answer(this, renderer.getNumber6(), pyramidNumbers.get(5), renderer, sounds);
+        createAnswers(pyramidNumbers);
 
     }
 
@@ -43,11 +39,11 @@ public class GameActivity extends AppCompatActivity {
      * @return pyramidNumbers
      */
     public ArrayList<Integer> buildPyramidNumbers() {
-        //Vamos a crear los 6 numeros aleatorios entre 1 y 9
-        pyramidNumbers = new ArrayList<>();
+        ArrayList<Integer> pyramidNumbers = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0; i <= 6; i++) {
-            pyramidNumbers.add(random.nextInt(10));
+        int maxRandom = (Configuration.getConfig().getUpperLimit() + 1) / 3;
+        for (int i = 0; i < 6; i++) {
+            pyramidNumbers.add(random.nextInt(maxRandom));
         }
         return pyramidNumbers;
     }
@@ -81,4 +77,12 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void createAnswers(ArrayList<Integer> pyramidNumbers){
+        TextView[] numbers = renderer.getNumbers();
+        int index = 1;
+        for (int i = 0; i < 3; i++){
+            new Answer(this, numbers[index], pyramidNumbers.get(index), renderer, sounds);
+            index = index + 2;
+        }
+    }
 }

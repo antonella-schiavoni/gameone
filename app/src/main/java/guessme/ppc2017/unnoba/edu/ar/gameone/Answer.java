@@ -37,19 +37,14 @@ public class Answer {
 
             @Override
             public boolean onDrag(View v, DragEvent event) {
-                // Del evento obtenemos la accion
-                int action = event.getAction();
-                switch ( action ) {
-                    // Si la accion es ACTION_DROP (Es decir que se esta soltando lo que se estaba arrastrando)
-                    case DragEvent.ACTION_DROP:
-                        // Obtenemos los datos guardados en dicho evento (dentro del clipData)
-                        // Ver OptionOnTouchListener para recordar
-                        String chosenTag = event.getClipData().getItemAt(0).getText().toString();
-                        // El dato alamcenado era la posicion de la opcion, la parseamos a integer
-                        int chosenIndex = Integer.parseInt(chosenTag);
-                        // Evaluamos si en esa posicion esta la opcion correcta
-                        evaluate(chosenIndex);
-                        break;
+               if (event.getAction() == DragEvent.ACTION_DROP) {
+                    // Obtenemos los datos guardados en dicho evento (dentro del clipData)
+                    // Ver OptionOnTouchListener para recordar
+                    String chosenTag = event.getClipData().getItemAt(0).getText().toString();
+                    // El dato alamcenado era la posicion de la opcion, la parseamos a integer
+                    int chosenIndex = Integer.parseInt(chosenTag);
+                    // Evaluamos si en esa posicion esta la opcion correcta
+                    evaluate(chosenIndex);
                 }
                 return true;
             }
@@ -71,8 +66,8 @@ public class Answer {
         int chosenNumber = Integer.parseInt(stringChosenNumber);
 
         // Verificamos si el numero elegido es igual al esperado
-        if ( chosenNumber == expectedNumber ) {
-           // Emitimos sonido de exito
+        if (chosenNumber == expectedNumber) {
+            // Emitimos sonido de exito
             sounds.emitSuccessSound();
             // A nuestra casilla le setteamos el valor correcto (stringChosenNumber)
             uiElement.setText(stringChosenNumber);
@@ -87,7 +82,7 @@ public class Answer {
             // todas las casillas bien
             gameActivity.evaluateAllAnswers();
         } else {
-           // Si elegimos la opcion equivocada, emitimos un sonido de error
+            // Si elegimos la opcion equivocada, emitimos un sonido de error
             sounds.emitErrorSound();
         }
     }
