@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -57,7 +58,18 @@ public class GameActivity extends AppCompatActivity {
     public void evaluateAllAnswers() {
         // Incrementamos el numero de aciertos
         numberOfHits += 1;
+        // Cada vez que llega a este metodo es porque la casilla fue bien respondida mostramos una imagen de "correcto"
+        renderer.getRightAnswerButton().setVisibility(View.VISIBLE);
+        Runnable runnable1 = new Runnable() {
+            public void run() {
+                renderer.getRightAnswerButton().setVisibility(View.INVISIBLE);
+            }
+        };
+        Handler handler1 = new Handler();
+        // Ejecuta el codigo que esta en run() dentro de runnable luego de 2000 milisegundos
+        handler1.postDelayed(runnable1, 2000);
         if (numberOfHits == 3) {
+
             // Dentro del metodo run de nuestro runnable guardamos el codigo que queremos
             // ejecutar (pero aun no lo hacemos)
             Runnable runnable = new Runnable() {

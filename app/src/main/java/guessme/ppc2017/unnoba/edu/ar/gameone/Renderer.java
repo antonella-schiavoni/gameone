@@ -2,6 +2,7 @@ package guessme.ppc2017.unnoba.edu.ar.gameone;
 
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ public class Renderer {
     private TextView[] options = new TextView[6];
 
     private Typeface font;
+
+    private ImageView rightAnswerButton;
+    private ImageView wrongAnswerButton;
 
     public void render(final MathOperation mathOperation, ArrayList<Integer> pyramidNumbers, Activity activity){
         // Primero asociamos los elemntos de la vista con las variables de este objeto
@@ -46,6 +50,9 @@ public class Renderer {
         options[3] = (TextView) activity.findViewById(R.id.option3);
         options[4] = (TextView) activity.findViewById(R.id.option4);
         options[5] = (TextView) activity.findViewById(R.id.option5);
+
+        rightAnswerButton = (ImageView) activity.findViewById(R.id.rightButton);
+        wrongAnswerButton = (ImageView) activity.findViewById(R.id.wrongButton);
     }
 
     private void realRender(MathOperation mathOperation, ArrayList<Integer> pyramidNumber,Activity activity) {
@@ -109,5 +116,21 @@ public class Renderer {
 
     public TextView[] getResults() {
         return results;
+    }
+
+    public ImageView getRightAnswerButton() {
+        return rightAnswerButton;
+    }
+
+    public void setRightAnswerButton(ImageView rightAnswerButton) {
+        this.rightAnswerButton = rightAnswerButton;
+    }
+
+    public ImageView getWrongAnswerButton() {
+        return wrongAnswerButton;
+    }
+
+    public void setWrongAnswerButton(ImageView wrongAnswerButton) {
+        this.wrongAnswerButton = wrongAnswerButton;
     }
 }

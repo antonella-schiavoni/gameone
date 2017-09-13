@@ -4,6 +4,7 @@ package guessme.ppc2017.unnoba.edu.ar.gameone;
  * Created by anton on 9/7/2017.
  */
 
+import android.os.Handler;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -84,6 +85,16 @@ public class Answer {
         } else {
             // Si elegimos la opcion equivocada, emitimos un sonido de error
             sounds.emitErrorSound();
+            // Y mostramos una imagen de "ERROR"
+            renderer.getWrongAnswerButton().setVisibility(View.VISIBLE);
+            Runnable runnable = new Runnable() {
+                public void run() {
+                    renderer.getWrongAnswerButton().setVisibility(View.GONE);
+                }
+            };
+            Handler handler1 = new Handler();
+            // Ejecuta el codigo que esta en run() dentro de runnable luego de 2000 milisegundos
+            handler1.postDelayed(runnable, 2000);
         }
     }
 
