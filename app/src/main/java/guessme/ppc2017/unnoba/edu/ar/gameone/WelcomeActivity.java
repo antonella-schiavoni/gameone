@@ -48,14 +48,7 @@ public class WelcomeActivity extends AppCompatActivity {
      * @param view
      */
    public void lessMaximum(View view) {
-        // Obtenemos la unica instancia de configuracion
-        Configuration config = Configuration.getConfig();
-        // Obtenemos tenemos de la vista, el textView que muestra esta configuracion
-        TextView maximum = (TextView) findViewById(R.id.maximum);
-        // Setteamos la nueva configuracion, actual - 1
-        config.setUpperLimit(config.getUpperLimit() - 1);
-        // Mostramos en la vista como quedo la configuracion
-        maximum.setText(String.valueOf(config.getUpperLimit()));
+       setNewMax(view, -1);
     }
 
     /**
@@ -65,12 +58,16 @@ public class WelcomeActivity extends AppCompatActivity {
      * @param view
      */
     public void moreMaximum(View view) {
+        setNewMax(view, 1);
+    }
+
+    private void setNewMax(View view, int number) {
         // Obtenemos la unica instancia de configuracion
         Configuration config = Configuration.getConfig();
         // Obtenemos tenemos de la vista, el textView que muestra esta configuracion
         TextView maximum = (TextView) findViewById(R.id.maximum);
         // Setteamos la nueva configuracion, actual + 1
-        config.setUpperLimit(config.getUpperLimit() + 1);
+        config.setUpperLimit(config.getUpperLimit() + number);
         // Mostramos en la vista como quedo la configuracion
         maximum.setText(String.valueOf(config.getUpperLimit()));
     }
