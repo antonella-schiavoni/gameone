@@ -1,6 +1,7 @@
 package guessme.ppc2017.unnoba.edu.ar.gameone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,15 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        // Obtenemos la ultima configuracion utilizada (si es que existe)
+        Configuration config = Configuration.getConfig();
+        SharedPreferences sharedPreferences = getSharedPreferences("PYRAMID_CONFIG", MODE_PRIVATE);
+        config.setSharedPreferences(sharedPreferences);
+
+        // Mostramos el limite superior en la vista acorde a la configuracion
+        TextView maximumText = (TextView) findViewById(R.id.maximum);
+        maximumText.setText("" + config.getUpperLimit());
     }
 
     /**
@@ -25,6 +35,9 @@ public class WelcomeActivity extends AppCompatActivity {
      */
     public void initiateGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
+
+        Configuration.getConfig().persistConfig();
+
         startActivity(intent);
     }
 
@@ -35,14 +48,7 @@ public class WelcomeActivity extends AppCompatActivity {
      * @param view
      */
    public void lessMaximum(View view) {
-        // Obtenemos la unica instancia de configuracion
-        Configuration config = Configuration.getConfig();
-        // Obtenemos tenemos de la vista, el textView que muestra esta configuracion
-        TextView maximum = (TextView) findViewById(R.id.maximum);
-        // Setteamos la nueva configuracion, actual - 1
-        config.setUpperLimit(config.getUpperLimit() - 1);
-        // Mostramos en la vista como quedo la configuracion
-        maximum.setText(String.valueOf(config.getUpperLimit()));
+       setNewMax(view, -1);
     }
 
     /**
@@ -52,12 +58,16 @@ public class WelcomeActivity extends AppCompatActivity {
      * @param view
      */
     public void moreMaximum(View view) {
+        setNewMax(view, 1);
+    }
+
+    private void setNewMax(View view, int number) {
         // Obtenemos la unica instancia de configuracion
         Configuration config = Configuration.getConfig();
         // Obtenemos tenemos de la vista, el textView que muestra esta configuracion
         TextView maximum = (TextView) findViewById(R.id.maximum);
         // Setteamos la nueva configuracion, actual + 1
-        config.setUpperLimit(config.getUpperLimit() + 1);
+        config.setUpperLimit(config.getUpperLimit() + number);
         // Mostramos en la vista como quedo la configuracion
         maximum.setText(String.valueOf(config.getUpperLimit()));
     }
