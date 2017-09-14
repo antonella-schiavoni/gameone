@@ -1,6 +1,7 @@
 package guessme.ppc2017.unnoba.edu.ar.gameone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,15 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        // Obtenemos la ultima configuracion utilizada (si es que existe)
+        Configuration config = Configuration.getConfig();
+        SharedPreferences sharedPreferences = getSharedPreferences("PYRAMID_CONFIG", MODE_PRIVATE);
+        config.setSharedPreferences(sharedPreferences);
+
+        // Mostramos el limite superior en la vista acorde a la configuracion
+        TextView maximumText = (TextView) findViewById(R.id.maximum);
+        maximumText.setText("" + config.getUpperLimit());
     }
 
     /**
@@ -25,6 +35,9 @@ public class WelcomeActivity extends AppCompatActivity {
      */
     public void initiateGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
+
+        Configuration.getConfig().persistConfig();
+
         startActivity(intent);
     }
 
