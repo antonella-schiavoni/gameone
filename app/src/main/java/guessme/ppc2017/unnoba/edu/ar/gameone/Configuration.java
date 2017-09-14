@@ -11,6 +11,7 @@ public class Configuration {
     private SharedPreferences sharedPreferences;
 
     private static final int MAXIMUM_UPPER_LIMIT = 100;
+    private static final int MINIMUM_UPPER_LIMIT = 20;
     private static final String CONFIG_MAX_KEY = "CONFIG_MAX";
     private static final int DEFAULT_UPPER_LIMIT = 20;
 
@@ -44,6 +45,10 @@ public class Configuration {
         // El límite superior, debe ser inferior del máximo permitido
         if ( upperLimit > MAXIMUM_UPPER_LIMIT ) {
             upperLimit = MAXIMUM_UPPER_LIMIT;
+        }
+
+        if ( upperLimit < MINIMUM_UPPER_LIMIT ) {
+            upperLimit = MINIMUM_UPPER_LIMIT;
         }
 
         this.upperLimit = upperLimit;
